@@ -44,9 +44,9 @@ a {
 nav{
   background: #404137;
   color:#fff;
-  overflow: auto;
-  height:40px;
-  padding:20px 0 0 10px;
+  overflow:auto ;
+  height:30px;
+  padding:20px 0 0 5px;
   font-size:18px;
 }
 
@@ -59,9 +59,10 @@ nav a{
   padding:10px;
   margin:0 10px;
   color:#fff;
+  text-decoration: none;
 }
 
-nav a.current, nav a.hover{
+nav a.current, nav a:hover{
   background:#83cd29;
-  color:black; 
+  color:#000; 
 }

@@ -6,11 +6,12 @@ var logger = require('morgan');
 var session = require('express-session');
 var multer = require('multer');
 var flash = require('connect-flash');
-var mongo = require('mongodb');
 var upload = multer({dest:' uploads/ '})
 var moment = require('moment');
 var expressValidator = require('express-validator');
-var db=require('monk')('localhost/nodeblog')
+
+var db=require('monk')('localhost/nodeblog');
+var mongo = require('mongodb');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
