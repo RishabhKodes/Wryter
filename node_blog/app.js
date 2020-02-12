@@ -7,17 +7,20 @@ var mongo = require('mongodb');
 var session = require('express-session');
 var multer = require('multer');
 var flash = require('connect-flash');
-var upload = multer({dest:'uploads/'})
-var moment = require('moment');
+var upload = multer({dest:'uploads/'});
 var expressValidator = require('express-validator');
 var monk =require('monk');
 const url = 'localhost:27017/nodeblog';
 const db = monk(url);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
+
+app.locals.moment = require('moment'); //moment is set as a global variable
+
+var indexRouter = require('./routes/index');
+var postsRouter = require('./routes/posts');
+var categoriesRouter = require('./routes/categories');
+
 //middleware
 
 //express-session
@@ -69,7 +72,8 @@ app.use(function(req,res,next){
 })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
+app.use('/categories', categoriesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
