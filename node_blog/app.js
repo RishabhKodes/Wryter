@@ -3,21 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongo = require('mongodb');
 var session = require('express-session');
 var multer = require('multer');
 var flash = require('connect-flash');
-var upload = multer({dest:' uploads/ '})
+var upload = multer({dest:'uploads/'})
 var moment = require('moment');
 var expressValidator = require('express-validator');
-
-var db=require('monk')('localhost/nodeblog');
-var mongo = require('mongodb');
+var monk =require('monk');
+const url = 'localhost:27017/nodeblog';
+const db = monk(url);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-
 //middleware
 
 //express-session
@@ -74,6 +74,7 @@ app.use('/users', usersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+  // throw err;
 });
 
 // error handler
