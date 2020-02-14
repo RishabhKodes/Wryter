@@ -17,6 +17,7 @@
     "jade": "~1.11.0",
     "moment": "*",
     "mongodb": "^3.0.1",
+    "mongoose": "^5.9.0",
     "monk": "git+https://github.com/Automattic/monk.git",
     "morgan": "~1.9.1",
     "multer": "*"

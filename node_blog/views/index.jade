@@ -7,9 +7,8 @@ block content
       h1
        a(href='/posts/show/#{post._id}')
         =post.title
-       p.meta Posted in 
-        a(href='/categories/show/#{post.category}') #{post.category} 
-        by #{post.author}
+       p.meta Posted in category
+        a(href='/categories/show/#{post.category}') #{post.category} by #{post.author}
        img(src='./public/images/#{post.mainimage}')
        !=truncateText(post.body, 200)
        a.more(href = '/posts/show/#{post._id}') Read More 
