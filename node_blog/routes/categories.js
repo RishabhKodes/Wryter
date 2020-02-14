@@ -5,12 +5,26 @@ var monk =require('monk');
 const url = 'localhost:27017/nodeblog';
 const db = monk(url);
 var mongo = require('mongodb');
+
+//routes
+router.get('/show/:category', function(req, res, next) {
+
+    var posts = db.get('posts');
+    posts.find({category: req.params.category},{},function(err, posts){
+        res.render('index',{
+            'title': req.params.category,
+            'posts':posts
+        })        
+    })
+    
+});
+
 router.get('/add', function(req, res, next) {
 
-        res.render('addcategory',{
-            'title': 'Add Category'
-        })        
-    
+    res.render('addcategory',{
+        'title': 'Add Category'
+    })        
+
 });
 
 router.post('/add', function(req, res, next) {

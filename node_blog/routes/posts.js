@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var upload = multer({dest:'uploads/ '});
+var upload = multer({dest:'./public/images'});
 
 var monk =require('monk');
 const url = 'localhost:27017/nodeblog';
@@ -26,7 +26,6 @@ router.post('/add',upload.single('mainimage'),function(req, res, next) {
     var category = req.body.category;
     var body = req.body.body;
     var author = req.body.author;
-    var date = req.body.date;   
 
     //to check if file is loaded correctly
     if(req.file){
@@ -52,12 +51,12 @@ router.post('/add',upload.single('mainimage'),function(req, res, next) {
             "title":title,
             "body":body,
             "category":category,
-            "date":date,
             "author":author,
             "image":mainimage 
         }, function(err, post){
               if(err){
                   res.send(err);
+                  console.log('Post not added')
               }else{
                   req.flash('success','Post Added');
                   //for redirecting back to homepage

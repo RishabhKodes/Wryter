@@ -15,7 +15,13 @@ const db = monk(url);
 
 var app = express();
 
-app.locals.moment = require('moment'); //moment is set as a global variable
+//these are global variables
+app.locals.moment = require('moment'); 
+app.locals.truncateText= function(text,length){
+
+  var trucatedText= text.substring(0,length); 
+  return trucatedText;
+}
 
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
