@@ -45,18 +45,19 @@ router.get('/show/:id', function(req, res, next) {
     
 });
 
-router.post('/add',upload.single('mainimage'),function(req, res, next) {
+router.post('/add',upload.single('image'),function(req, res, next) {
     //to get form values
     var title = req.body.title;
     var category = req.body.category;
     var body = req.body.body;
     var author = req.body.author;
+    var image=req.body.image;
 
     //to check if file is loaded correctly
     if(req.file){
-            var mainimage =req.file.filename;
+            var image =req.file.filename;
     }else{
-        var mainimage='no-image.jpg'
+        var image='no-image.jpg'
     }
 
     //form validation
@@ -77,7 +78,7 @@ router.post('/add',upload.single('mainimage'),function(req, res, next) {
             "body":body,
             "category":category,
             "author":author,
-            "image":mainimage 
+            "image":image 
         }, function(err, post){
               if(err){
                   res.send(err);

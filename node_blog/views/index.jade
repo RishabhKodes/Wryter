@@ -7,9 +7,9 @@ block content
       h1
        a(href='/posts/show/#{post._id}')
         =post.title
-       p.meta Posted in category
+       p.meta Posted in category 
         a(href='/categories/show/#{post.category}') #{post.category} by #{post.author}
-       img(src='./public/images/#{post.mainimage}')
+       img(src='/images/#{post.image}')
        !=truncateText(post.body, 200)
        a.more(href = '/posts/show/#{post._id}') Read More 
       //-  the above command is to see the list of posts
