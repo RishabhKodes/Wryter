@@ -19,10 +19,11 @@ Some major frameworks that were used in creating of this project.
 
 1. Clone the repo
 ```sh
-git clone https://github.com/RishabhKodes/Login-System.git
+git clone git@github.com:RishabhKodes/Wryter.git
 ```
 2. Goto root directory
 ```sh
+cd Wryter
 cd node_blogger
 ```
 3. Install NPM packages
