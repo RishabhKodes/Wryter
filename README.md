@@ -53,7 +53,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact Me
 
-**Rishabh Bhandari -** [LinkedIn](https://www.linkedin.com/in/rishabh-bhandari-ba5778168/)5
+**Rishabh Bhandari -** [LinkedIn](https://www.linkedin.com/in/rishabh-bhandari-ba5778168/)
 [Email](rishabhbhandari6@gmail.com)
 
 **Project Link -** [GitHub](https://github.com/RishabhKodes/Login-System)
