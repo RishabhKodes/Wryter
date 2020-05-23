@@ -10,7 +10,7 @@ var flash = require('connect-flash');
 var upload = multer({dest:'uploads/'});
 var expressValidator = require('express-validator');
 var monk =require('monk');
-const url = 'localhost:27017/nodeblog';
+const url = 'localhost:27017/wryter';
 const db = monk(url);
 
 var app = express();
@@ -98,4 +98,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(process.env.PORT || 3001, function(req,res){
+  console.log("Running on port 3001");
+});
 module.exports = app;
