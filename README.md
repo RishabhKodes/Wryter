@@ -31,7 +31,7 @@ npm install
 ```
 4. Run using command:
 ```JS
-npn start
+npm start
 ```
 4. Visit Link
 ```sh

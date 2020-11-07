@@ -98,7 +98,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(process.env.PORT || 3001, function(req,res){
-  console.log("Running on port 3001");
+app.listen(process.env.PORT || 3000, function(req,res){
+  console.log("Running on port 3000");
 });
 module.exports = app;
