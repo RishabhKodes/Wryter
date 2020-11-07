@@ -24,7 +24,6 @@ git clone git@github.com:RishabhKodes/Wryter.git
 2. Goto root directory
 ```sh
 cd Wryter
-cd node_blog
 ```
 3. Install NPM packages
 ```sh
