@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var monk =require('monk');
-const url = 'localhost:27017/nodeblog';
+const url = 'localhost:27017/wryter';
 const db = monk(url);
 var mongo = require('mongodb');
 
