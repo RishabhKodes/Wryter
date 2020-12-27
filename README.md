@@ -39,9 +39,6 @@ https://localhost:3000
 ```
 
 <!-- CONTRIBUTING -->
-## Contibutions Welcome
-
-
 ## Contributing
 
 Note that this repo is just the core backend of the service with very basic UI implementations. **UI contributions are needed**. If you are making a UI, create a new directory called `views/frontend`.
