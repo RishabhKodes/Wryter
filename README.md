@@ -6,7 +6,7 @@
 Wryter is a blogging portal, you can post and find numerous blogs of different writers, the blogs are categorized in different categories, you can add your post under a specific category or create your own category. There's also the feature of comments, other users can comment on your blog posts. All the posts, categories and comments are saved in a MongoDB database.
 **In the Website**, click on Add Post, to create and post a new blog, Home has all the posts from different users. Click on Add Category to add your new, custom category.
 ### Built With
-Some major frameworks that were used in creating of this project.
+Some major frameworks that were used in this project.
 * [Nodejs](https://nodejs.org/en/)
 * [Jade](http://jade-lang.com/)
 * [MongoDB](https://www.mongodb.com/)
@@ -41,6 +41,7 @@ https://localhost:3000
 <!-- CONTRIBUTING -->
 ## Contributing
 
+Note that this repo is just the core backend of the service with very basic UI implementations. **UI contributions are needed**. If you are making a UI, create a new directory called `views/frontend`.
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
