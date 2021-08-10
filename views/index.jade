@@ -2,14 +2,15 @@ extends layout
 
 block content
   if posts
-    each post, i in posts
-     .post
-      h1
-       a(href='/posts/show/#{post._id}')
-        =post.title
-       p.meta Posted in category 
-        a(href='/categories/show/#{post.category}') #{post.category} by #{post.author}
-       img(src='/images/#{post.image}')
-       !=truncateText(post.body, 200)
-       a.more(href = '/posts/show/#{post._id}') Full Article
-      //-  the above command is to see the list of posts
+   each post, i in posts
+    .post
+     h1
+      a(href='/posts/show/#{post._id}')
+       =post.title
+     p.meta Posted in 
+      a(href='/categories/show/#{post.category}') #{post.category} 
+      by #{post.author} 
+      on #{moment(post.date).format("MM-DD-YYYY")}
+     img(src='/images/#{post.mainimage}')
+     !=truncateText(post.body,400)
+     a.more(href='/posts/show/#{post._id}') Read More

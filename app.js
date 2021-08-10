@@ -1,104 +1,116 @@
-var createError = require('http-errors');
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
-var mongo = require('mongodb');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var session = require('express-session');
 var multer = require('multer');
-var flash = require('connect-flash');
-var upload = multer({dest:'uploads/'});
+var upload = multer({ dest: 'uploads/' })
 var expressValidator = require('express-validator');
-var monk =require('monk');
-const url = 'localhost:27017/wryter';
-const db = monk(url);
+
+var mongo = require('mongodb');
+var db = require('monk')('mongodb+srv://user:security@cluster0.phkem.mongodb.net/wryter?retryWrites=true&w=majority');
+
+var routes = require('./routes/index');
+var posts = require('./routes/posts');
+var categories = require('./routes/categories');
 
 var app = express();
 
-//these are global variables
-app.locals.moment = require('moment'); 
-app.locals.truncateText= function(text,length){
+app.locals.moment = require('moment');
 
-  var trucatedText= text.substring(0,length); 
-  return trucatedText;
+app.locals.truncateText = function(text, length){
+  var truncatedText = text.substring(0, length);
+  return truncatedText;
 }
-
-var indexRouter = require('./routes/index');
-var postsRouter = require('./routes/posts');
-var categoriesRouter = require('./routes/categories');
-
-//middleware
-
-//express-session
-app.use(session({
-  secret:'secret',
-  saveUninitialized:true,
-  resave:true
-}));
-
-//express-validator
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value){
-    var namespace = param.split('.')
-    , root = namespace.shift()
-    , formParam = root;
-
-    while(namespace.length){
-      formParam += '[' +namespace.shift() +']';
-    }
-    return{
-      param:formParam,
-      msg:msg,
-      value:value 
-    };
-  }
-}));
-//connect-flash
-app.use(flash());
-app.use(function(req,res,next){
-  res.locals.messages=require('express-messages')(req,res);
-  next();
-});
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//making db accessible to our router
-app.use(function(req,res,next){
-  req.db=db;
-  next();
-})
+// Express Session
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
 
-app.use('/', indexRouter);
-app.use('/posts', postsRouter);
-app.use('/categories', categoriesRouter)
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+
+// Connect-Flash
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
+app.use('/', routes);
+app.use('/posts', posts);
+app.use('/categories', categories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
-  // throw err;
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-// error handler
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
-app.listen(process.env.PORT || 3000, function(req,res){
-  console.log("Running on port 3000");
-});
+
 module.exports = app;
